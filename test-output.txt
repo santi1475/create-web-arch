@@ -1,0 +1,301 @@
+
+[1m[7m[36m RUN [39m[27m[22m [36mv2.1.9 [39m[90mD:/SGV/Kairos Systems/PROYECTOS/Personales/create-next-arch[39m
+
+ [31mÔØ»[39m templates/generate/component.test.tsx [2m([22m[2m0 test[22m[2m)[22m
+ [31mÔØ»[39m templates/cli.test.ts [2m([22m[2m71 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 1411[2mms[22m[39m
+[31m   [31m├ù[31m Simple starter mode[2m > [22mwrites a minimal page when starter is simple[90m 21[2mms[22m[31m[39m
+[31m     ÔåÆ expected 'import React from \'react\';\r\n\r\neÔÇª' to contain 'proj-starter-simple'[39m
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ» Failed Suites 1 ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+
+ FAIL  templates/generate/component.test.tsx [ templates/generate/component.test.tsx ]
+Error: Transform failed with 1 error:
+D:/SGV/Kairos Systems/PROYECTOS/Personales/create-next-arch/templates/generate/component.test.tsx:2:8: ERROR: Expected identifier but found "{"
+  Plugin: vite:esbuild
+  File: D:/SGV/Kairos Systems/PROYECTOS/Personales/create-next-arch/templates/generate/component.test.tsx:2:8
+  
+  Expected identifier but found "{"
+  1  |  import { render, screen } from "@testing-library/react";
+  2  |  import {{COMPONENT_NAME}} from "./{{COMPONENT_NAME}}";
+     |          ^
+  3  |  
+  4  |  describe("{{COMPONENT_NAME}}", () => {
+  
+ ÔØ» failureErrorWithLog node_modules/esbuild/lib/main.js:1472:15
+ ÔØ» node_modules/esbuild/lib/main.js:755:50
+ ÔØ» responseCallbacks.<computed> node_modules/esbuild/lib/main.js:622:9
+ ÔØ» handleIncomingPacket node_modules/esbuild/lib/main.js:677:12
+ ÔØ» Socket.readFromStdout node_modules/esbuild/lib/main.js:600:7
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1/2]ÔÄ»
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ» Failed Tests 1 ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+
+ FAIL  templates/cli.test.ts > Simple starter mode > writes a minimal page when starter is simple
+AssertionError: expected 'import React from \'react\';\r\n\r\neÔÇª' to contain 'proj-starter-simple'
+
+- Expected
++ Received
+
+- proj-starter-simple
++ import React from 'react';
+
++ 
+
++ export default function Home() {
+
++   return (
+
++     <main className="min-h-screen bg-background text-foreground">
+
++       {/* Hero Section */}
+
++       <section className="relative overflow-hidden">
+
++         {/* Decorative elements */}
+
++         <div className="absolute top-0 left-0 w-96 h-96 bg-muted rounded-full blur-3xl opacity-40 -translate-x-1/2 -translate-y-1/2" />
+
++         <div className="absolute bottom-0 right-0 w-96 h-96 bg-muted rounded-full blur-3xl opacity-40 translate-x-1/2 translate-y-1/2" />
+
++ 
+
++         <div className="relative px-6 py-20 sm:py-28 lg:py-32">
+
++           <div className="mx-auto max-w-3xl">
+
++             {/* Badge */}
+
++             <div className="mb-6 flex justify-center">
+
++               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 text-sm font-medium text-muted-foreground backdrop-blur-sm hover:bg-card/70 transition-colors">
+
++                 <span className="flex h-2 w-2 rounded-full bg-foreground" />
+
++                 {{ PROJECT_NAME }}
+
++               </div>
+
++             </div>
+
++ 
+
++             {/* Main Heading */}
+
++             <h1 className="text-center text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-balance leading-tight mb-6">
+
++               {{ PAGE_SIMPLE_TITLE }}
+
++             </h1>
+
++ 
+
++             {/* Description */}
+
++             <p className="text-center text-base sm:text-lg text-muted-foreground text-balance leading-relaxed mb-8 mx-auto max-w-2xl">
+
++               {{ PAGE_SIMPLE_BODY }}
+
++             </p>
+
++ 
+
++             {/* Code Block */}
+
++             <div className="mx-auto max-w-2xl mb-8">
+
++               <div className="group rounded-xl border border-border bg-card/50 backdrop-blur-sm overflow-hidden hover:border-foreground/20 transition-colors">
+
++                 <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-muted/30">
+
++                   <div className="flex gap-2">
+
++                     <div className="w-3 h-3 rounded-full bg-destructive/40" />
+
++                     <div className="w-3 h-3 rounded-full bg-yellow-500/40" />
+
++                     <div className="w-3 h-3 rounded-full bg-green-500/40" />
+
++                   </div>
+
++                   <span className="ml-auto text-xs text-muted-foreground font-mono">Terminal</span>
+
++                 </div>
+
++                 <code className="block px-4 py-6 text-sm sm:text-base font-mono text-foreground overflow-x-auto">
+
++                   <span className="text-muted-foreground">$</span> {{ STARTER_COMMAND }}
+
++                 </code>
+
++               </div>
+
++             </div>
+
++           </div>
+
++         </div>
+
++       </section>
+
++ 
+
++       {/* Feature Grid */}
+
++       <section className="relative border-t border-border/30">
+
++         <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20 lg:py-24">
+
++           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
++             {[
+
++               {
+
++                 title: 'Modern',
+
++                 description: 'Built with the latest design patterns and best practices',
+
++               },
+
++               {
+
++                 title: 'Fast',
+
++                 description: 'Optimized for performance with zero compromises',
+
++               },
+
++               {
+
++                 title: 'Scalable',
+
++                 description: 'Ready to grow and adapt to your needs',
+
++               },
+
++             ].map((feature, index) => (
+
++               <div
+
++                 key={index}
+
++                 className="group rounded-lg border border-border/50 bg-card/30 p-6 hover:border-border hover:bg-card/60 transition-all duration-300 cursor-pointer"
+
++               >
+
++                 <div className="mb-4 h-12 w-12 rounded-lg bg-muted/50 group-hover:bg-muted transition-colors flex items-center justify-center">
+
++                   <div className="h-6 w-6 rounded bg-foreground/10" />
+
++                 </div>
+
++                 <h3 className="text-lg font-semibold mb-2 text-foreground">
+
++                   {feature.title}
+
++                 </h3>
+
++                 <p className="text-sm text-muted-foreground leading-relaxed">
+
++                   {feature.description}
+
++                 </p>
+
++               </div>
+
++             ))}
+
++           </div>
+
++         </div>
+
++       </section>
+
++ 
+
++       {/* Divider */}
+
++       <div className="relative border-t border-border/30" />
+
++ 
+
++       {/* CTA Section */}
+
++       <section className="relative">
+
++         <div className="mx-auto max-w-4xl px-6 py-16 sm:py-20 lg:py-24">
+
++           <div className="text-center">
+
++             <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-foreground">
+
++               Ready to get started?
+
++             </h2>
+
++             <p className="text-muted-foreground mb-8 text-balance">
+
++               Everything you need to build amazing things is already here.
+
++             </p>
+
++             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+
++               <button className="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors">
+
++                 Get Started
+
++               </button>
+
++               <button className="px-8 py-3 border border-border bg-background text-foreground rounded-lg font-medium hover:bg-muted/30 transition-colors">
+
++                 Learn More
+
++               </button>
+
++             </div>
+
++           </div>
+
++         </div>
+
++       </section>
+
++ 
+
++       {/* Footer */}
+
++       <footer className="border-t border-border/30 bg-muted/20">
+
++         <p className="text-xs font-semibold uppercase tracking-widest text-slate-950">
+
++           Kayros Systems
+
++         </p>
+
++       </footer>
+
++     </main>
+
++   );
+
++ }
+
++
+
+ ÔØ» templates/cli.test.ts:457:18
+    455| 
+    456|     const page = await fs.readFile(path.join(projectDir, "src/app/pageÔÇª
+    457|     expect(page).toContain("proj-starter-simple");
+       |                  ^
+    458|     expect(page).toContain("Start by editing src/app/page.tsx or generÔÇª
+    459|     expect(page).not.toContain("How to start with this architecture");
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[2/2]ÔÄ»
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m70 passed[39m[22m[90m (71)[39m
+[2m   Start at [22m 13:27:05
+[2m   Duration [22m 1.95s[2m (transform 91ms, setup 0ms, collect 126ms, tests 1.41s, environment 0ms, prepare 425ms)[22m
+
