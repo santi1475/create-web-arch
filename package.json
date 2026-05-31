@@ -1,6 +1,6 @@
 {
   "name": "create-next-arch",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "CLI to scaffold Next.js projects with clean architecture, git standards and dev tools ready",
   "type": "module",
   "main": "src/index.js",
@@ -38,17 +38,19 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "@clack/prompts": "^0.9.1",
+    "boxen": "^8.0.1",
     "chalk": "^5.3.0",
     "commander": "^12.0.0",
     "fs-extra": "^11.2.0",
-    "inquirer": "^9.2.15",
-    "ora": "^8.0.1"
+    "giget": "^1.2.3",
+    "gradient-string": "^3.0.0"
   },
   "devDependencies": {
     "vitest": "^2.0.0"
   },
   "scripts": {
-    "test": "vitest run tests/cli.test.ts",
-    "test:watch": "vitest tests/cli.test.ts"
+    "test": "vitest run templates/cli.test.ts",
+    "test:watch": "vitest templates/cli.test.ts"
   }
 }

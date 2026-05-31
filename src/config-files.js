@@ -11,8 +11,8 @@ import { buildShadcnConfig } from "./shadcn.js";
 
 // Windows ESM symlink fix: use import.meta.url directly
 const TEMPLATES = path.join(fileURLToPath(new URL(".", import.meta.url)), "../templates");
-
-const VERSION = "5.0.0";
+const packageJsonPath = path.join(fileURLToPath(new URL(".", import.meta.url)), "../package.json");
+const VERSION = fs.readJsonSync(packageJsonPath).version;
 
 const readTemplate = async (filename, replacements = {}) => {
   const content = await fs.readFile(path.join(TEMPLATES, filename), "utf-8");
