@@ -86,4 +86,4 @@ MIT
 Contact: santiguz1475@gmail.com | Santi1475 (GitHub)
 
 ---
-*Built with [create-next-arch](https://github.com/tu-usuario/create-next-arch)*
+*Built with [create-next-arch](https://github.com/santi1475/create-next-arch)*

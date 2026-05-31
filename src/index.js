@@ -89,7 +89,7 @@ const I18N = {
     generate_hint: "Genera artefactos respetando tu arquitectura:",
     contributing: "Lee CONTRIBUTING.md para los estándares de commits.",
     open_file: "Abre el archivo y define tus props / tipos.",
-    suggest_issues: "¿Bug inesperado? Reporta en: https://github.com/tu-usuario/create-next-arch/issues",
+    suggest_issues: "¿Bug inesperado? Reporta en: https://github.com/santi1475/create-next-arch/issues",
   },
   en: {
     q_lang: "🌐  Language / Idioma:",
@@ -156,7 +156,7 @@ const I18N = {
     generate_hint: "Generate artifacts respecting your architecture:",
     contributing: "Read CONTRIBUTING.md for commit standards.",
     open_file: "Open the file and define your props / types.",
-    suggest_issues: "Unexpected bug? Report at: https://github.com/tu-usuario/create-next-arch/issues",
+    suggest_issues: "Unexpected bug? Report at: https://github.com/santi1475/create-next-arch/issues",
   },
 };
 

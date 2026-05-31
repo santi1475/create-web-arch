@@ -31,7 +31,7 @@ const buildCmds = (pm) => ({
 // i18n strings needed for README
 const README_I18N = {
   es: {
-    tagline:         (arch) => `Proyecto generado con [create-next-arch](https://github.com/tu-usuario/create-next-arch) — arquitectura \`${arch}\`.`,
+    tagline:         (arch) => `Proyecto generado con [create-next-arch](https://github.com/santi1475/create-next-arch) — arquitectura \`${arch}\`.`,
     requirements:    "Requisitos",    install:      "Instalación",
     scripts:         "Scripts",       description:  "Descripción",
     dev:             "Servidor de desarrollo en `localhost:3000`",
@@ -51,7 +51,7 @@ const README_I18N = {
     license:         "Licencia",
   },
   en: {
-    tagline:         (arch) => `Project generated with [create-next-arch](https://github.com/tu-usuario/create-next-arch) — \`${arch}\` architecture.`,
+    tagline:         (arch) => `Project generated with [create-next-arch](https://github.com/santi1475/create-next-arch) — \`${arch}\` architecture.`,
     requirements:    "Requirements",  install:      "Getting started",
     scripts:         "Scripts",       description:  "Description",
     dev:             "Dev server at `localhost:3000`",
