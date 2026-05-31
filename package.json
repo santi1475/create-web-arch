@@ -5,7 +5,7 @@
   "type": "module",
   "main": "src/index.js",
   "bin": {
-    "create-next-arch": "./src/index.js"
+    "create-next-arch": "src/index.js"
   },
   "files": [
     "src",
@@ -28,7 +28,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/santi1475/create-next-arch.git"
+    "url": "git+https://github.com/santi1475/create-next-arch.git"
   },
   "homepage": "https://github.com/santi1475/create-next-arch#readme",
   "bugs": {
