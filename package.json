@@ -1,11 +1,11 @@
 {
-  "name": "create-next-arch",
-  "version": "2.1.0",
+  "name": "create-web-arch",
+  "version": "3.0.0",
   "description": "CLI to scaffold Next.js projects with clean architecture, git standards and dev tools ready",
   "type": "module",
   "main": "src/index.js",
   "bin": {
-    "create-next-arch": "src/index.js"
+    "create-web-arch": "src/index.js"
   },
   "files": [
     "src",
@@ -28,11 +28,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/santi1475/create-next-arch.git"
+    "url": "git+https://github.com/santi1475/create-web-arch.git"
   },
-  "homepage": "https://github.com/santi1475/create-next-arch#readme",
+  "homepage": "https://github.com/santi1475/create-web-arch#readme",
   "bugs": {
-    "url": "https://github.com/santi1475/create-next-arch/issues"
+    "url": "https://github.com/santi1475/create-web-arch/issues"
   },
   "engines": {
     "node": ">=18.0.0"

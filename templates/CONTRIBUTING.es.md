@@ -93,22 +93,22 @@ release/2.1.0
 
 ## 🏗 Arquitectura y Generadores de Código
 
-Este proyecto utiliza una estructura de carpetas precisa generada por `create-next-arch`. Para mantener la consistencia arquitectónica en todo el equipo, **evita crear archivos y carpetas manualmente**. 
+Este proyecto utiliza una estructura de carpetas precisa generada por `create-web-arch`. Para mantener la consistencia arquitectónica en todo el equipo, **evita crear archivos y carpetas manualmente**. 
 
 En su lugar, usa siempre los generadores automáticos del CLI:
 
 ```bash
 # Componentes (Client/Server)
-npx create-next-arch generate component MiComponente
+npx create-web-arch generate component MiComponente
 
 # Hooks personalizados
-npx create-next-arch generate hook Auth
+npx create-web-arch generate hook Auth
 
 # Servicios / Integraciones API
-npx create-next-arch generate service Usuario
+npx create-web-arch generate service Usuario
 
 # Funcionalidades completas (Solo si usas arquitectura feature-based)
-npx create-next-arch generate feature Checkout
+npx create-web-arch generate feature Checkout
 ```
 
 El uso de estos comandos garantiza que tus archivos se coloquen en los directorios correctos, que los alias se apliquen sin errores, y que el proyecto se mantenga perfectamente organizado a medida que escala.

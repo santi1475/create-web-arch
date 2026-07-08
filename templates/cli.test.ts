@@ -35,13 +35,13 @@ async function scaffoldFakeNextProject(dir: string, architecture: string, lang =
   await fs.writeFile(path.join(dir, "src/app/globals.css"), "/* boilerplate */");
   await fs.writeFile(path.join(dir, "src/app/layout.tsx"), "// boilerplate layout");
 
-  // .next-arch.json (simulates what injectConfigFiles writes)
-  await fs.writeJson(path.join(dir, ".next-arch.json"), {
+  // .web-arch.json (simulates what injectConfigFiles writes)
+  await fs.writeJson(path.join(dir, ".web-arch.json"), {
     architecture, lang, packageManager: "npm", version: "5.0.0",
   }, { spaces: 2 });
 }
 
-/** Run a CLI command non-interactively by injecting .next-arch.json */
+/** Run a CLI command non-interactively by injecting .web-arch.json */
 function runCLI(args: string[], cwd: string) {
   return spawnSync("node", [CLI, ...args], {
     cwd, shell: false, encoding: "utf-8",
@@ -320,7 +320,7 @@ describe("Config file generation", () => {
   it("creates .husky/commit-msg",  async () => expect(await fs.pathExists(path.join(projectDir, ".husky/commit-msg"))).toBe(true));
   it("creates .github/workflows",  async () => expect(await fs.pathExists(path.join(projectDir, ".github/workflows/ci.yml"))).toBe(true));
   it("creates .env.example",       async () => expect(await fs.pathExists(path.join(projectDir, ".env.example"))).toBe(true));
-  it("creates .next-arch.json",    async () => expect(await fs.pathExists(path.join(projectDir, ".next-arch.json"))).toBe(true));
+  it("creates .web-arch.json",    async () => expect(await fs.pathExists(path.join(projectDir, ".web-arch.json"))).toBe(true));
 
   it("README contains project name", async () => {
     const content = await fs.readFile(path.join(projectDir, "README.md"), "utf-8");
@@ -332,13 +332,13 @@ describe("Config file generation", () => {
     expect(content).toContain("Modo de home elegido: **guided**");
   });
 
-  it(".next-arch.json has correct architecture", async () => {
-    const config = await fs.readJson(path.join(projectDir, ".next-arch.json"));
+  it(".web-arch.json has correct architecture", async () => {
+    const config = await fs.readJson(path.join(projectDir, ".web-arch.json"));
     expect(config.architecture).toBe("feature");
   });
 
-  it(".next-arch.json stores starter mode", async () => {
-    const config = await fs.readJson(path.join(projectDir, ".next-arch.json"));
+  it(".web-arch.json stores starter mode", async () => {
+    const config = await fs.readJson(path.join(projectDir, ".web-arch.json"));
     expect(config.starter).toBe("guided");
   });
 });
@@ -394,7 +394,7 @@ describe("Starter page enrichment", () => {
     const page = await fs.readFile(path.join(projectDir, "src/app/page.tsx"), "utf-8");
     expect(page).toContain("Layer-based");
     expect(page).toContain("Shadcn/ui");
-    expect(page).toContain("create-next-arch generate component HeroBanner");
+    expect(page).toContain("create-web-arch generate component HeroBanner");
     expect(page).toContain("UI en components, lógica en hooks, acceso remoto en services");
   });
 });
@@ -416,7 +416,7 @@ describe("Starter page per architecture", () => {
     const page = await fs.readFile(path.join(projectDir, "src/app/page.tsx"), "utf-8");
     expect(page).toContain("Public API");
     expect(page).toContain("@features/<slug>");
-    expect(page).toContain("create-next-arch g feature Checkout");
+    expect(page).toContain("create-web-arch g feature Checkout");
   });
 
   it("ddd highlights use cases and infrastructure separation", async () => {
@@ -478,7 +478,7 @@ describe("Demo starter mode", () => {
     expect(page).toContain("A starter that already feels like a product");
     expect(page).toContain("Ready commands");
     expect(page).toContain("How to start with this architecture");
-    expect(page).toContain("create-next-arch g feature Checkout");
+    expect(page).toContain("create-web-arch g feature Checkout");
   });
 });
 

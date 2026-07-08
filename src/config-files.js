@@ -31,7 +31,7 @@ const buildCmds = (pm) => ({
 // i18n strings needed for README
 const README_I18N = {
   es: {
-    tagline:         (arch) => `Proyecto generado con [create-next-arch](https://github.com/santi1475/create-next-arch) — arquitectura \`${arch}\`.`,
+    tagline:         (arch) => `Proyecto generado con [create-web-arch](https://github.com/santi1475/create-web-arch) — arquitectura \`${arch}\`.`,
     requirements:    "Requisitos",    install:      "Instalación",
     scripts:         "Scripts",       description:  "Descripción",
     dev:             "Servidor de desarrollo en `localhost:3000`",
@@ -51,7 +51,7 @@ const README_I18N = {
     license:         "Licencia",
   },
   en: {
-    tagline:         (arch) => `Project generated with [create-next-arch](https://github.com/santi1475/create-next-arch) — \`${arch}\` architecture.`,
+    tagline:         (arch) => `Project generated with [create-web-arch](https://github.com/santi1475/create-web-arch) — \`${arch}\` architecture.`,
     requirements:    "Requirements",  install:      "Getting started",
     scripts:         "Scripts",       description:  "Description",
     dev:             "Dev server at `localhost:3000`",
@@ -141,9 +141,9 @@ export async function injectConfigFilesForTest(projectPath, opts) {
     Object.fromEntries(Object.entries(aliases).map(([k, v]) => [k, v[0]])), null, 4
   );
   const generateExamples = [
-    "create-next-arch generate component MyButton",
-    "create-next-arch generate hook Auth",
-    "create-next-arch generate service User",
+    "create-web-arch generate component MyButton",
+    "create-web-arch generate hook Auth",
+    "create-web-arch generate service User",
   ].join("\n");
   const generateDetails = buildGenerateDetails(lang, architecture);
 
@@ -206,8 +206,8 @@ export async function injectConfigFilesForTest(projectPath, opts) {
     );
   }
 
-  // .next-arch.json
-  await fs.writeJson(path.join(projectPath, ".next-arch.json"), {
+  // .web-arch.json
+  await fs.writeJson(path.join(projectPath, ".web-arch.json"), {
     architecture, packageManager, lang, starter, version: VERSION,
     createdAt: new Date().toISOString(),
   }, { spaces: 2 });

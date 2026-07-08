@@ -16,7 +16,7 @@ export async function executeHighSpeedUnpack(targetDir, template, lang = "en") {
   
   spinner.start(msgStart);
 
-  const templatePath = `gh:santi1475/next-architecture-templates/templates/${template}`;
+  const templatePath = `gh:santi1475/web-architecture-templates/templates/${template}`;
 
   try {
     await downloadTemplate(templatePath, {

@@ -45,7 +45,7 @@ const I18N = {
     next_steps: "Próximos pasos:",
     contributing: "Lee CONTRIBUTING.md para los estándares de commits.",
     open_file: "Abre el archivo y define tus props / tipos.",
-    suggest_issues: "¿Bug inesperado? Reporta en: https://github.com/santi1475/create-next-arch/issues",
+    suggest_issues: "¿Bug inesperado? Reporta en: https://github.com/santi1475/create-web-arch/issues",
     projectNameMandatory: "El identificador del proyecto es obligatorio.",
     spin_git: "Inicializando Git…",
     ok_git: "Git listo (primer commit ✔)",
@@ -66,7 +66,7 @@ const I18N = {
     next_steps: "Next steps:",
     contributing: "Read CONTRIBUTING.md for commit standards.",
     open_file: "Open the file and define your props / types.",
-    suggest_issues: "Unexpected bug? Report at: https://github.com/santi1475/create-next-arch/issues",
+    suggest_issues: "Unexpected bug? Report at: https://github.com/santi1475/create-web-arch/issues",
     projectNameMandatory: "Project name identifier is required.",
     spin_git: "Initializing Git…",
     ok_git: "Git ready (first commit ✔)",
@@ -120,7 +120,7 @@ const toKebab  = (s) => s.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 const isInteractive = () => Boolean(process.stdin.isTTY && process.stdout.isTTY);
 
 const readProjectConfig = async () => {
-  const p = path.join(process.cwd(), ".next-arch.json");
+  const p = path.join(process.cwd(), ".web-arch.json");
   if (!(await fs.pathExists(p))) throw new Error("no_config");
   return fs.readJson(p);
 };
@@ -135,7 +135,7 @@ const fatalError = (err, t) => {
 const setupGit = (projectPath) => {
   run("git init",  projectPath, "git init");
   run("git add .", projectPath, "git add");
-  run(`git commit -m "chore: initial scaffold by create-next-arch"`, projectPath, "git commit");
+  run(`git commit -m "chore: initial scaffold by create-web-arch"`, projectPath, "git commit");
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -217,7 +217,7 @@ const createCommand = async (projectNameArg, cliOptions = {}) => {
     await fs.writeJson(pkgJsonPath, pkgJson, { spaces: 2 });
   }
 
-  // Write a minimal .next-arch.json config so the generate command knows the architecture template type
+  // Write a minimal .web-arch.json config so the generate command knows the architecture template type
   const configObj = {
     architecture: template,
     packageManager: packageManager === "skip" ? "npm" : packageManager,
@@ -225,7 +225,7 @@ const createCommand = async (projectNameArg, cliOptions = {}) => {
     version: VERSION,
     createdAt: new Date().toISOString()
   };
-  await fs.writeJson(path.join(projectPath, ".next-arch.json"), configObj, { spaces: 2 });
+  await fs.writeJson(path.join(projectPath, ".web-arch.json"), configObj, { spaces: 2 });
 
   // 3. Install dependencies
   if (packageManager !== "skip") {
@@ -283,7 +283,7 @@ const generateCommand = async (type, name) => {
 
   let config;
   try { config = await readProjectConfig(); }
-  catch { fatalError(new Error("No .next-arch.json found. Run from a project root created with create-next-arch."), null); }
+  catch { fatalError(new Error("No .web-arch.json found. Run from a project root created with create-web-arch."), null); }
 
   const { architecture, packageManager = "npm", lang = "en" } = config;
   const t    = I18N[lang];
@@ -450,7 +450,7 @@ const generateCommand = async (type, name) => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 program
-  .name("create-next-arch")
+  .name("create-web-arch")
   .description("Next.js scaffolder — architecture + git + libraries")
   .version(VERSION);
 
@@ -471,10 +471,10 @@ program
     "",
     "  Types:    component | hook | service | feature",
     "  Examples:",
-    "    create-next-arch generate component MyButton",
-    "    create-next-arch g hook Auth",
-    "    create-next-arch g service User",
-    "    create-next-arch g feature Checkout   (feature-based only)",
+    "    create-web-arch generate component MyButton",
+    "    create-web-arch g hook Auth",
+    "    create-web-arch g service User",
+    "    create-web-arch g feature Checkout   (feature-based only)",
   ].join("\n"))
   .action(async (type, name) => {
     try { await generateCommand(type, name); }

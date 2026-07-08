@@ -55,16 +55,16 @@ cp .env.example .env.local
 
 ```bash
 # Component
-npx create-next-arch generate component <Name>
+npx create-web-arch generate component <Name>
 
 # Hook
-npx create-next-arch g hook <Name>
+npx create-web-arch g hook <Name>
 
 # Service
-npx create-next-arch g service <Name>
+npx create-web-arch g service <Name>
 
 # Feature (Only in Feature-based architecture)
-npx create-next-arch g feature <Name>
+npx create-web-arch g feature <Name>
 ```
 
 ### 🔍 {{README_GENERATE_DETAILS_TITLE}}
@@ -86,4 +86,4 @@ MIT
 Contact: santiguz1475@gmail.com | Santi1475 (GitHub)
 
 ---
-*Built with [create-next-arch](https://github.com/santi1475/create-next-arch)*
+*Built with [create-web-arch](https://github.com/santi1475/create-web-arch)*
