@@ -5,18 +5,19 @@ import chalk from "chalk";
 /**
  * Downloads the requested architecture template using giget.
  * @param {string} targetDir - where the user wants to create the project
+ * @param {string} framework - next | astro
  * @param {string} template - feature | layer | ddd
  * @param {string} lang - "es" | "en"
  */
-export async function executeHighSpeedUnpack(targetDir, template, lang = "en") {
+export async function executeHighSpeedUnpack(targetDir, framework, template, lang = "en") {
   const spinner = p.spinner();
-  const msgStart = lang === "es" 
-    ? "Descargando plantilla de arquitectura desde GitHub..." 
+  const msgStart = lang === "es"
+    ? "Descargando plantilla de arquitectura desde GitHub..."
     : "Downloading architecture template from GitHub...";
-  
+
   spinner.start(msgStart);
 
-  const templatePath = `gh:santi1475/web-architecture-templates/templates/${template}`;
+  const templatePath = `gh:santi1475/web-architecture-templates/templates/${framework}/${template}`;
 
   try {
     await downloadTemplate(templatePath, {

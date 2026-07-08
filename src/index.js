@@ -40,6 +40,9 @@ const I18N = {
     q_missing_deps: (pkgs) => `Faltan las dependencias recomendadas: ${pkgs.join(", ")}. ¿Quieres instalarlas ahora?`,
     err_exists: (n) => `La carpeta "${n}" ya existe.`,
     err_feature_only: "El tipo 'feature' solo está disponible en arquitectura feature-based.",
+    err_hook_astro: "El tipo 'hook' no está disponible en proyectos Astro (es un concepto de React).",
+    ok_gen: (type, name) => `${type} "${name}" generado ✔`,
+    ok_feature: (name) => `Feature "${name}" generado ✔`,
     cancelled: "Operación cancelada.",
     git_warn: "⚠️  Repositorio Git detectado en el directorio actual o en un padre.",
     next_steps: "Próximos pasos:",
@@ -61,6 +64,9 @@ const I18N = {
     q_missing_deps: (pkgs) => `Recommended dependencies are missing: ${pkgs.join(", ")}. Do you want to install them?`,
     err_exists: (n) => `Folder "${n}" already exists.`,
     err_feature_only: "The 'feature' type is only available in feature-based architecture.",
+    err_hook_astro: "The 'hook' type isn't available in Astro projects (it's a React concept).",
+    ok_gen: (type, name) => `${type} "${name}" generated ✔`,
+    ok_feature: (name) => `Feature "${name}" generated ✔`,
     cancelled: "Operation cancelled.",
     git_warn: "⚠️  Git repository detected in current directory or a parent.",
     next_steps: "Next steps:",
@@ -151,9 +157,12 @@ const createCommand = async (projectNameArg, cliOptions = {}) => {
 
   renderIntro(VERSION);
 
-  // Validate template parameter if supplied via CLI
+  // Validate template/framework parameters if supplied via CLI
   if (cliOptions.template && !["feature", "layer", "ddd"].includes(cliOptions.template)) {
     fatalError(new Error(`Invalid template: "${cliOptions.template}". Use: feature | layer | ddd`), t);
+  }
+  if (cliOptions.framework && !["next", "astro"].includes(cliOptions.framework)) {
+    fatalError(new Error(`Invalid framework: "${cliOptions.framework}". Use: next | astro`), t);
   }
 
   if (detectExistingGitRepo()) {
@@ -176,6 +185,7 @@ const createCommand = async (projectNameArg, cliOptions = {}) => {
       const defaultPm = determineFastestPackageManager();
       opts = await askQuestionsClack({
         projectNameArg,
+        frameworkArg: cliOptions.framework,
         templateArg: cliOptions.template,
         t,
         lang,
@@ -187,13 +197,14 @@ const createCommand = async (projectNameArg, cliOptions = {}) => {
     }
   } else {
     opts = {
-      projectName: projectNameArg || "my-next-app",
+      projectName: projectNameArg || "my-app",
+      framework: cliOptions.framework || "next",
       template: cliOptions.template || "feature",
       packageManager: "skip"
     };
   }
 
-  const { projectName, template, packageManager } = opts;
+  const { projectName, framework, template, packageManager } = opts;
 
   let resolvedProjectName = projectName;
   let projectPath = path.resolve(process.cwd(), projectName);
@@ -207,7 +218,7 @@ const createCommand = async (projectNameArg, cliOptions = {}) => {
   }
 
   // 1. Download template using giget
-  await executeHighSpeedUnpack(projectPath, template, lang);
+  await executeHighSpeedUnpack(projectPath, framework, template, lang);
 
   // 2. Rename package.json name to the chosen project name
   const pkgJsonPath = path.join(projectPath, "package.json");
@@ -219,6 +230,7 @@ const createCommand = async (projectNameArg, cliOptions = {}) => {
 
   // Write a minimal .web-arch.json config so the generate command knows the architecture template type
   const configObj = {
+    framework,
     architecture: template,
     packageManager: packageManager === "skip" ? "npm" : packageManager,
     lang,
@@ -263,6 +275,7 @@ const createCommand = async (projectNameArg, cliOptions = {}) => {
   // 5. Completion banner
   renderCompletionBox({
     projectName: resolvedProjectName,
+    framework,
     template,
     pkgManager: packageManager,
     t
@@ -285,12 +298,17 @@ const generateCommand = async (type, name) => {
   try { config = await readProjectConfig(); }
   catch { fatalError(new Error("No .web-arch.json found. Run from a project root created with create-web-arch."), null); }
 
-  const { architecture, packageManager = "npm", lang = "en" } = config;
+  const { architecture, framework = "next", packageManager = "npm", lang = "en" } = config;
   const t    = I18N[lang];
 
   // Feature type only for feature-based
   if (type === "feature" && architecture !== "feature") {
     fatalError(new Error(t.err_feature_only), t);
+  }
+
+  // Hooks are a React concept; Astro components don't use them by default
+  if (type === "hook" && framework === "astro") {
+    fatalError(new Error(t.err_hook_astro), t);
   }
 
   // ── Dependency resolver ───────────────────────────────────────────────────
@@ -363,10 +381,16 @@ const generateCommand = async (type, name) => {
   const destDir = path.join(process.cwd(), GENERATE_PATHS[type][architecture](name));
   let destFile, templateFile, replacements, testFile;
 
-  if (type === "component") {
+  if (type === "component" && framework === "astro") {
+    const componentName = toPascal(name);
+    destFile     = path.join(destDir, `${componentName}.astro`);
+    templateFile = "generate/component.astro";
+    replacements = { COMPONENT_NAME: componentName };
+
+  } else if (type === "component") {
     let isClient = false;
     let withTest = false;
-    
+
     if (isInteractive()) {
       const isClientVal = await p.select({
         message: t.q_comp_client,
@@ -407,7 +431,7 @@ const generateCommand = async (type, name) => {
   } else if (type === "service") {
     const serviceName = toPascal(name);
     destFile     = path.join(destDir, `${serviceName}Service.ts`);
-    templateFile = "generate/service.ts";
+    templateFile = framework === "astro" ? "generate/service-astro.ts" : "generate/service.ts";
     replacements = { SERVICE_NAME: serviceName, SERVICE_SLUG: toKebab(serviceName) };
   }
 
@@ -451,12 +475,13 @@ const generateCommand = async (type, name) => {
 
 program
   .name("create-web-arch")
-  .description("Next.js scaffolder — architecture + git + libraries")
+  .description("Next.js / Astro scaffolder — architecture + git + libraries")
   .version(VERSION);
 
 program
   .command("create [project-name]", { isDefault: true })
-  .description("Create a new Next.js project with architecture ready")
+  .description("Create a new Next.js or Astro project with architecture ready")
+  .option("--framework <type>", "Framework: next | astro")
   .option("--template <type>", "Architecture template: feature | layer | ddd")
   .action(async (arg, options) => {
     try { await createCommand(arg, options); }

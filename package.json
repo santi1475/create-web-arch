@@ -1,7 +1,7 @@
 {
   "name": "create-web-arch",
-  "version": "3.0.1",
-  "description": "CLI to scaffold Next.js projects with clean architecture, git standards and dev tools ready",
+  "version": "3.1.0",
+  "description": "CLI to scaffold Next.js or Astro projects with clean architecture, git standards and dev tools ready",
   "type": "module",
   "main": "src/index.js",
   "bin": {
@@ -14,6 +14,7 @@
   "keywords": [
     "nextjs",
     "next.js",
+    "astro",
     "cli",
     "scaffold",
     "architecture",

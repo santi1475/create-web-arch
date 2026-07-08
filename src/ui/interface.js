@@ -35,6 +35,7 @@ export function renderIntro(version) {
  */
 export async function askQuestionsClack({
   projectNameArg,
+  frameworkArg,
   templateArg,
   t,
   lang,
@@ -59,7 +60,22 @@ export async function askQuestionsClack({
     result.projectName = projectNameArg;
   }
 
-  // 2. Template / Architecture Selection (if not supplied via CLI)
+  // 2. Framework Selection (if not supplied via CLI)
+  if (!frameworkArg) {
+    const framework = await p.select({
+      message: chalk.hex(accentColor)("├─ FRAMEWORK"),
+      options: [
+        { value: "next", label: "▲ Next.js", hint: "App Router, React 19 (Recommended)" },
+        { value: "astro", label: "🚀 Astro", hint: "Content-focused, islands architecture" }
+      ]
+    });
+    if (p.isCancel(framework)) handleCancel();
+    result.framework = framework;
+  } else {
+    result.framework = frameworkArg;
+  }
+
+  // 3. Template / Architecture Selection (if not supplied via CLI)
   if (!templateArg) {
     const template = await p.select({
       message: chalk.hex(accentColor)("├─ ARCHITECTURE_TEMPLATE"),
@@ -75,7 +91,7 @@ export async function askQuestionsClack({
     result.template = templateArg;
   }
 
-  // 3. Package Manager (for dependencies installation)
+  // 4. Package Manager (for dependencies installation)
   const packageManager = await p.select({
     message: chalk.hex(accentColor)("└─ DEPS_INSTALLATION_PACKAGE_MANAGER"),
     options: [
@@ -116,11 +132,12 @@ function handleCancel() {
 /**
  * Render standard premium completion box
  */
-export function renderCompletionBox({ projectName, template, pkgManager, t }) {
+export function renderCompletionBox({ projectName, framework, template, pkgManager, t }) {
   const successUIMap = `
 ${chalk.bold.hex(accentColor)(`✔ ${t.ok_project || "Project ready!"}`)}
 
   ${chalk.bold("Proyecto:")}     ${chalk.cyan(projectName)}
+  ${chalk.bold("Framework:")}    ${chalk.cyan(framework)}
   ${chalk.bold("Template:")}     ${chalk.cyan(template)}
   ${chalk.bold("Git:")}          ${chalk.cyan("commit inicial ✔")}
 

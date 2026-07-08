@@ -7,7 +7,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js" alt="Next.js 15">
   &nbsp;
-  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react" alt="React 19">
+  <img src="https://img.shields.io/badge/Astro-7-BC52EE?logo=astro" alt="Astro 7">
   &nbsp;
   <img src="https://img.shields.io/badge/TypeScript-5%2B-3178C6?logo=typescript" alt="TypeScript 5+">
   &nbsp;
@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  A blazing-fast CLI to scaffold production-ready Next.js 15 projects with enterprise-grade architectures.<br>
+  A blazing-fast CLI to scaffold production-ready Next.js or Astro projects with clean architectures.<br>
   Powered by <a href="https://github.com/unjs/giget"><code>giget</code></a> for instant remote template delivery.
 </p>
 
@@ -25,12 +25,12 @@
 
 ## ✨ Key Features
 
+- ▲🚀 **Two frameworks** — Next.js 15 (App Router) or Astro 7, your choice.
 - 🏗️ **Three battle-tested architectures** — Feature-based, Layer-based, and DDD, available instantly from remote templates.
-- 🎨 **Shadcn/UI pre-configured** — Zero path resolution bugs, adapted to each architecture's folder structure.
-- 🧹 **Code quality baked in** — ESLint, Prettier, Husky, and Conventional Commits (Commitlint) out of the box.
-- ⚡ **Modern stack** — Next.js App Router, Tailwind v4, TanStack Query, and Lucide Icons.
+- 🧹 **Code quality baked in** — ESLint, Prettier, and Conventional Commits (Commitlint) out of the box.
+- ⚡ **Modern stack** — Tailwind CSS v4, TypeScript strict mode.
 - 📦 **Universal package manager support** — Works with `npm`, `pnpm`, `yarn`, and `bun`.
-- 🛠️ **Dynamic generators** — Scaffold components, hooks, services, and features from your project root.
+- 🛠️ **Dynamic generators** — Scaffold components, services, and features (plus hooks, on Next.js) from your project root.
 
 ---
 
@@ -42,23 +42,24 @@ npx create-web-arch <project-name>
 
 The interactive wizard will guide you through:
 
-1. **Template selection** — `feature`, `layer`, or `ddd`
-2. **Package manager** — `npm`, `pnpm`, `yarn`, or `bun`
-3. **Automatic dependency install** — or skip and do it yourself
+1. **Framework selection** — `next` or `astro`
+2. **Template selection** — `feature`, `layer`, or `ddd`
+3. **Package manager** — `npm`, `pnpm`, `yarn`, or `bun`
+4. **Automatic dependency install** — or skip and do it yourself
 
-You can also pass the template directly to skip the prompt:
+You can also pass both flags directly to skip the prompts:
 
 ```bash
-npx create-web-arch my-app --template feature
-npx create-web-arch my-app --template layer
-npx create-web-arch my-app --template ddd
+npx create-web-arch my-app --framework next --template feature
+npx create-web-arch my-app --framework astro --template layer
+npx create-web-arch my-app --template ddd            # framework defaults to next
 ```
 
 ---
 
 ## 🏗 Supported Architectures
 
-Templates are pulled directly from [`santi1475/web-architecture-templates`](https://github.com/santi1475/web-architecture-templates) via `giget`, so you always get the latest version.
+Templates are pulled directly from [`santi1475/web-architecture-templates`](https://github.com/santi1475/web-architecture-templates) via `giget`, so you always get the latest version. Each of the three architectures below ships for **both** Next.js (`src/app/`) and Astro (`src/pages/`) — the folder tree is identical outside the routing directory, and Next.js additionally gets a `hooks/` layer (Astro doesn't use React hooks by default).
 
 ### `feature` — Feature-Based Architecture
 
@@ -69,10 +70,10 @@ src/
 ├── features/
 │   └── checkout/
 │       ├── components/
-│       ├── hooks/
+│       ├── hooks/        # Next.js only
 │       └── services/
 ├── shared/
-└── app/
+└── app/ (Next.js) / pages/ (Astro)
 ```
 
 ### `layer` — Layer-Based Architecture
@@ -82,10 +83,10 @@ Classic horizontal structure. Perfect for mid-sized applications with clear sepa
 ```
 src/
 ├── components/
-├── hooks/
+├── hooks/                # Next.js only
 ├── services/
 ├── utils/
-└── app/
+└── app/ (Next.js) / pages/ (Astro)
 ```
 
 ### `ddd` — Domain Driven Design
@@ -107,10 +108,10 @@ src/
 Once your project is scaffolded, never create boilerplate manually again:
 
 ```bash
-# Create a UI Component (prompts for Server/Client and optional tests)
+# Create a UI Component (Next.js prompts Server/Client + optional tests; Astro writes a plain .astro file)
 npx create-web-arch g component Navbar
 
-# Create a custom hook
+# Create a custom hook (Next.js only — Astro has no default hook model)
 npx create-web-arch g hook useTheme
 
 # Create a service / data-fetching layer
@@ -120,7 +121,7 @@ npx create-web-arch g service Users
 npx create-web-arch g feature Payments
 ```
 
-> Tip: `g` is a shortcut for `generate`.
+> Tip: `g` is a shortcut for `generate`. The framework is read from `.web-arch.json`, written at project creation — no flag needed here.
 
 ---
 
@@ -130,7 +131,7 @@ This CLI consumes templates from a dedicated repository:
 
 👉 [`santi1475/web-architecture-templates`](https://github.com/santi1475/web-architecture-templates)
 
-Each template is a fully independent, production-ready Next.js 15 boilerplate. To contribute a template or report an issue with the scaffolding content, open an issue there.
+Each template is a fully independent, production-ready boilerplate (Next.js 15 or Astro 7). To contribute a template or report an issue with the scaffolding content, open an issue there.
 
 ---
 
