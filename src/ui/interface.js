@@ -15,7 +15,7 @@ export function renderIntro(version) {
   console.clear();
   
   const introBox = boxen(
-    techGradient("  C R E A T E   ///   N E X T   ///   A R C H  "),
+    techGradient("  C R E A T E   ///   W E B   ///   A R C H  "),
     {
       padding: { top: 1, bottom: 1, left: 3, right: 3 },
       margin: { top: 1, bottom: 1, left: 0, right: 0 },
